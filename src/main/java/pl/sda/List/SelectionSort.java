@@ -1,6 +1,29 @@
 package pl.sda.List;
 
 public class SelectionSort {
+    public int findMinValueIndex(IList<Integer> list,int startIndex){
+        int minValue = list.get(startIndex);
+        int minValueIndex = startIndex;
+        for(int i = startIndex+1; i < list.size(); i++) {
+            if(list.get(i) < minValue) {
+                minValue = list.get(i);
+                minValueIndex = i;
+            }
+        }
+        return minValueIndex;
+    }
+
+    public IList sort(IList <Integer> listToSort){
+        int firstUnsortedIndex = 0;
+        do {
+            int minIndex = findMinValueIndex(listToSort, firstUnsortedIndex);
+            int tmp = listToSort.get(minIndex);
+            listToSort.set(minIndex, listToSort.get(firstUnsortedIndex));
+            listToSort.set(firstUnsortedIndex,tmp);
+        } while(++firstUnsortedIndex != listToSort.size());
+        return listToSort;
+    }
+
     public int[] sort(int[] tableToSort) {
         int firstUnsortedIndex = 0;
         do {
